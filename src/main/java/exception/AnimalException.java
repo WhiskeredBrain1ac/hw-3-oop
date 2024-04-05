@@ -1,9 +1,9 @@
 package exception;
 
-public class AnimalException extends RuntimeException {
+public class AnimalException extends AbstractAnimalException {
 
-    public AnimalException(String message) {
-        super(message);
+    public AnimalException() {
+        super("Неизвестное животное!");
     }
 
 }
