@@ -8,8 +8,8 @@ public class Cat extends Pet {
         super(breed, name, cost, character, birthDate);
     }
 
-
     public Cat(LocalDate birthDate) {
         super(birthDate);
     }
+
 }
