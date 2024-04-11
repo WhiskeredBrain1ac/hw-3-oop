@@ -14,4 +14,5 @@ public interface Animal {
 
     LocalDate getBirthDate();
 
+    int compareTo(Animal animal);
 }

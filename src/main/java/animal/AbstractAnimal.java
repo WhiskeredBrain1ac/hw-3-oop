@@ -2,14 +2,14 @@ package animal;
 
 import java.time.LocalDate;
 
-public abstract class AbstractAnimal implements Animal {
+public abstract class AbstractAnimal implements Animal,Comparable{
 
-    protected String breed; // порода
-    protected String name; // имя
-    protected Double cost; // цена в магазине
-    protected String character; // характер
+    protected String breed;
+    protected String name;
+    protected Double cost;
+    protected String character;
 
-    protected LocalDate birthDate; // День рождения животного
+    protected LocalDate birthDate;
 
     public AbstractAnimal(LocalDate birthDate) {
         this.birthDate = getBirthDate();
@@ -56,6 +56,12 @@ public abstract class AbstractAnimal implements Animal {
                 ", character = '" + character + '\'' +
                 ", birthDate = '" + birthDate + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Animal animal) {
+            int result = this.birthDate.compareTo(animal.getBirthDate());
+            return result;
     }
 
 }

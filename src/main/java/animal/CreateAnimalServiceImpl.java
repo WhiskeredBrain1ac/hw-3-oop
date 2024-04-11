@@ -3,35 +3,35 @@ package animal;
 import enumerated.AnimalEnum;
 import exception.AnimalException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
 
     @Override
-    public List<Animal> create(AnimalEnum animalEnum, int amount) {
-        List<Animal> animals = new ArrayList<>();
+    public Map<String, List<Animal>> create(AnimalEnum animalEnum, int amount) {
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
         for (int i = 0; i < amount; i++) {
-            animals.add(createAnimal(animalEnum));
+            animalsMap.putAll(createAnimal(animalEnum));
         }
-        return animals;
+        return animalsMap;
     }
 
     @Override
-    public List<Animal> create(AnimalEnum animalEnum) {
+    public Map<String, List<Animal>> create(AnimalEnum animalEnum) {
         int amount = 10;
         List<Animal> animals = new ArrayList<>();
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
         do {
-            animals.add(createAnimal(animalEnum));
+            animalsMap.putAll(createAnimal(animalEnum));
             amount--;
         }
         while (amount > 0);
-        return animals;
+        return animalsMap;
     }
 
-
-    public Animal createAnimal(AnimalEnum animalEnum) {
+    public Map<String, List<Animal>> createAnimal(AnimalEnum animalEnum) {
+        List<Animal> animals = new ArrayList<>();
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
         Random random = new Random();
         String name = names.get(random.nextInt(names.size()));
         String breed = breeds.get(random.nextInt(breeds.size()));
@@ -41,24 +41,32 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         switch (animalEnum) {
             case CAT:
                 animal = new Cat(breed, name, cost, character, getBirthDate());
+                animals.add(animal);
+                animalsMap.put(breed, animals);
                 System.out.println(animal);
                 break;
             case DOG:
                 animal = new Dog(breed, name, cost, character, getBirthDate());
+                animals.add(animal);
+                animalsMap.put(breed, animals);
                 System.out.println(animal);
                 break;
             case SHARK:
                 animal = new Shark(breed, name, cost, character, getBirthDate());
+                animals.add(animal);
+                animalsMap.put(breed, animals);
                 System.out.println(animal);
                 break;
             case WOLF:
                 animal = new Wolf(breed, name, cost, character, getBirthDate());
+                animals.add(animal);
+                animalsMap.put(breed, animals);
                 System.out.println(animal);
                 break;
             default:
                 throw new AnimalException();
         }
-        return animal;
+        return animalsMap;
     }
 
 }
