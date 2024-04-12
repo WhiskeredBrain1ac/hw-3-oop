@@ -14,6 +14,7 @@ public class AnimalRepositoryImpl implements AnimalRepository {
         Map<String, LocalDate> animalsLeapYear = new HashMap<>();
         for (Animal animal : animals) {
             LocalDate birthDate = animal.getBirthDate();
+            if(birthDate == null) throw new EmptyObjectException();
             if (birthDate.isLeapYear()) {
                 String type = animal.getName() + ", " + animal.getBreed();
                 animalsLeapYear.put(type, birthDate);
@@ -44,10 +45,8 @@ public class AnimalRepositoryImpl implements AnimalRepository {
         if (animals == null || animals.isEmpty()) throw new EmptyObjectException();
         Map<String, Integer> result = new HashMap<>();
         HashSet<Animal> animalHashSet = new HashSet<>();
-        int count = 0;
-        if (animals.isEmpty()) throw new EmptyObjectException();
         for (Animal animal : animals) {
-            int defaultValue = 1;
+            int defaultValue = 0;
             int cnt = result.getOrDefault(animal.getBreed(), defaultValue);
             if (!animalHashSet.add(animal)) {
                 result.put(animal.getBreed(), cnt + 1);
