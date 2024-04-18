@@ -12,10 +12,10 @@ public class SearchServiceImpl implements SearchService {
         if (animal.getBirthDate() == null) throw new InvalidAnimalBirthDateException(animal.getBreed());
         LocalDate birthDate = animal.getBirthDate();
         if (birthDate.isLeapYear()) {
-            System.out.println("Животное " + animal.getName() + " появилось на свет в ВИСОКОСНЫЙ год.");
+            System.out.println("Животное " + animal.getBreed() + " с кличкой " + animal.getName() + " появилось на свет в ВИСОКОСНЫЙ год.");
             return true;
         } else {
-            System.out.println("Животное " + animal.getName() + " появилось на свет в НЕВИСОКОСНЫЙ год.");
+            System.out.println("Животное " + animal.getBreed() + " с кличкой " + animal.getName() + " появилось на свет в НЕВИСОКОСНЫЙ год.");
             return false;
         }
     }

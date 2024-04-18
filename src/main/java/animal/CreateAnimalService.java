@@ -4,10 +4,7 @@ import enumerated.AnimalEnum;
 import exception.AnimalException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public interface CreateAnimalService {
@@ -21,10 +18,10 @@ public interface CreateAnimalService {
     List<String> characters = Arrays.asList("ехидность", "двуличность", "любопытство", "капризность", "благородство",
             "пассивность", "наглость", "неряшливость", "корыстность", "неряшливость");
 
-
-    default List<Animal> create(AnimalEnum animalEnum) {
+    default Map<String, List<Animal>> create(AnimalEnum animalEnum) {
         int amount = 10;
         List<Animal> animals = new ArrayList<>();
+        Map<String, List<Animal>> animalsMap = new HashMap<>();
         while (amount > 0) {
             Random random = new Random();
             String name = names.get(random.nextInt(names.size()));
@@ -36,21 +33,25 @@ public interface CreateAnimalService {
                 case CAT:
                     Cat cat = new Cat(breed, name, cost, character, getBirthDate());
                     animals.add(cat);
+                    animalsMap.put(breed, animals);
                     System.out.println(cat);
                     break;
                 case DOG:
                     Dog dog = new Dog(breed, name, cost, character, getBirthDate());
                     animals.add(dog);
+                    animalsMap.put(breed, animals);
                     System.out.println(dog);
                     break;
                 case SHARK:
                     Shark shark = new Shark(breed, name, cost, character, getBirthDate());
                     animals.add(shark);
+                    animalsMap.put(breed, animals);
                     System.out.println(shark);
                     break;
                 case WOLF:
                     Wolf wolf = new Wolf(breed, name, cost, character, getBirthDate());
                     animals.add(wolf);
+                    animalsMap.put(breed, animals);
                     System.out.println(wolf);
                     break;
                 default:
@@ -58,10 +59,10 @@ public interface CreateAnimalService {
             }
             amount--;
         }
-        return animals;
+        return animalsMap;
     }
 
-    List<Animal> create(AnimalEnum animalEnum, int amount);
+    Map<String, List<Animal>> create(AnimalEnum animalEnum, int amount);
 
     default LocalDate getBirthDate() {
         Random random = new Random();

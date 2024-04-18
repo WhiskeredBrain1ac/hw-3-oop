@@ -1,15 +1,16 @@
 package animal;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class AbstractAnimal implements Animal {
 
-    protected String breed; // порода
-    protected String name; // имя
-    protected Double cost; // цена в магазине
-    protected String character; // характер
+    protected String breed;
+    protected String name;
+    protected Double cost;
+    protected String character;
 
-    protected LocalDate birthDate; // День рождения животного
+    protected LocalDate birthDate;
 
     public AbstractAnimal(LocalDate birthDate) {
         this.birthDate = getBirthDate();
@@ -58,4 +59,16 @@ public abstract class AbstractAnimal implements Animal {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractAnimal that = (AbstractAnimal) o;
+        return Objects.equals(breed, that.breed) && Objects.equals(name, that.name) && Objects.equals(cost, that.cost) && Objects.equals(character, that.character) && Objects.equals(birthDate, that.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(breed, name, cost, character, birthDate);
+    }
 }
