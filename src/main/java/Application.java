@@ -25,11 +25,14 @@ public class Application {
                 new Cat("Тульский красавец", "Семён", 700.0, "Любопытный", LocalDate.of(2008, 11, 11)),
                 new Cat("Рязанский вороной", "Антонина", 7700.0, "Добрый", LocalDate.of(2013, 3, 8)),
                 new Dog("Дворовый пёс", "Лев", 900.0, "Ласковый", LocalDate.of(2021, 3, 8)),
-                new Cat("Тульский красавец", "Семён", 700.0, "Любопытный", LocalDate.of(2008, 11, 11))
+                new Cat("Тульский красавец", "Степан", 300.0, "Честный", LocalDate.of(2008, 1, 11))
         ));
-        System.out.println(animalRepository.findLeapYearNames(animalList));
-        System.out.println(animalRepository.findOlderAnimal(animalList, 10));
+        System.out.println("Животные, родившиеся в високосный год: " + animalRepository.findLeapYearNames(animalList));
+        System.out.println(animalRepository.findOlderAnimal(animalList, 10) + "\n");
         System.out.println(animalRepository.findDuplicate(animalsLeapYear));
+        animalRepository.findAverageAge(animalsLeapYear);
+        System.out.println(animalRepository.findOldAndExpensive(animalsLeapYear));
+        System.out.println(animalRepository.findMinConstAnimals(animalsLeapYear));
 
         LocalDate localDate = LocalDate.now();
         System.out.println(localDate);
