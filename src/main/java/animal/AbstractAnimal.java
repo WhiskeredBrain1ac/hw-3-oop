@@ -1,6 +1,7 @@
 package animal;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public abstract class AbstractAnimal implements Animal {
@@ -70,5 +71,10 @@ public abstract class AbstractAnimal implements Animal {
     @Override
     public int hashCode() {
         return Objects.hash(breed, name, cost, character, birthDate);
+    }
+
+    @Override
+    public int getAge() {
+        return Period.between(getBirthDate(), LocalDate.now()).getYears();
     }
 }
